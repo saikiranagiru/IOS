@@ -16,20 +16,23 @@ class GenreViewController: UIViewController,UITableViewDelegate, UITableViewData
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             var cell = genreTableView.dequeueReusableCell(withIdentifier: "sectionCell", for: indexPath)
             cell.textLabel?.text = movieArr[indexPath.row].category
+
+            
             return cell
         }
+
 
     @IBOutlet weak var genreTableView: UITableView!
     
     var movieArr = movies
-    
-    var items : Genre?
+        
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        self.title = "Genre"
+        self.title = "Movies App"
                 // Do any additional setup after loading the view.
         genreTableView.delegate = self
         genreTableView.dataSource = self
@@ -39,7 +42,9 @@ class GenreViewController: UIViewController,UITableViewDelegate, UITableViewData
             let transition = segue.identifier
             if transition == "movieSegue"{
                 let destination = segue.destination as! MoviesViewController
-                destination.details = items!.movie[(genreTableView.indexPathForSelectedRow?.row)!]
+                destination.details = movieArr[genreTableView.indexPathForSelectedRow!.row].movie
+
+                destination.items = movieArr[(genreTableView.indexPathForSelectedRow?.row)!]
             }
 
 
